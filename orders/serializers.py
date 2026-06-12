@@ -23,4 +23,5 @@ class OrderSerializer(serializers.ModelSerializer):
         model = Order
         fields = ['id', 'status', 'total', 'item_count', 'is_pending', 'items', 'created_at']
 
+ 
         
