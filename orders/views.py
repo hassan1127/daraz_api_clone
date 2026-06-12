@@ -46,20 +46,19 @@ class OrderViewSet(viewsets.ViewSet):
         order = Order.objects.create(user=request.user, status='PENDING')
         total = 0
 
+        # orders/views.py
         for item in cart.items.all():
-            OrderItem.objects.create(
-                order=order,
-                product=item.product,
-                quantity=item.quantity
-            )
-            # deduct stock
-            item.product.stock -= item.quantity
-            item.product.save()
+          OrderItem.objects.create(
+           order=order,
+           product=item.product,
+           quantity=item.quantity
+        )
+          item.product.stock -= item.quantity
+          item.product.save()
+          total += item.total_price   # ← no parentheses now
 
-            total += item.total_price()
-
-        order.total = total
-        order.save()
+          order.total = total
+          order.save()
 
         # clear cart
         cart.items.all().delete()
