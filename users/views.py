@@ -114,3 +114,5 @@ class SellerRequestActionView(views.APIView):
             target_user.seller_request_status = 'REJECTED'
             target_user.save()
             return Response({'detail': f'{target_user.email} seller request rejected.'})
+        
+        
